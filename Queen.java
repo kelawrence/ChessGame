@@ -11,18 +11,18 @@ import java.util.List;
 
 /**
  * @author Krysten Lawrence
- * @version 1.1
+ * @version 1.0
  * @since 17th March 2019
- * Class to create the Bishop and to specify the legal moves for the Bishop Piece
+ * Class to create the Queen and to specify the legal moves for the Queen Piece
  */
-public class Bishop extends Piece{
-    private final static int[] POTENTIAL_MOVE_VECTOR_LOCATIONS = {-9, -7, 7, 9};
+public class Queen extends Piece{
+    private final static int[] POTENTIAL_MOVE_VECTOR_LOCATIONS = {-9, -8, -7, -1, 1, 7, 8, 9};
 
-    public Bishop(int piecePosition, Colour pieceColour){
+    public Queen(int piecePosition, Colour pieceColour){
         super(piecePosition, pieceColour);
     }
 
-    @Override
+   @Override
     public Collection<Move> calculateLegalMoves(final Board board){
         final List<Move> legalMoves = new ArrayList<>();
         for(final int potentialMove : POTENTIAL_MOVE_VECTOR_LOCATIONS){
@@ -50,12 +50,12 @@ public class Bishop extends Piece{
             }
         }
         return ImmutableList.copyOf(legalMoves);
-    }
-    
+    }    
     private static boolean isFirstColumnExclusion(final int currentLocation, final int potentialOffset){
-        return BoardUtils.FIRST_COLUMN[currentLocation] && (potentialOffset == -9 || potentialOffset == 7);
+        return BoardUtils.FIRST_COLUMN[currentLocation] && (potentialOffset == -9 || potentialOffset == 7 || potentialOffset == -1);
     }
     private static boolean isEigthColumnExclusion(final int currentLocation, final int potentialOffset){
-        return BoardUtils.EIGTH_COLUMN[currentLocation] && (potentialOffset == 9 || potentialOffset == -7);
+        return BoardUtils.EIGTH_COLUMN[currentLocation] && (potentialOffset == 9 || potentialOffset == -7 || potentialOffset == 1);
     }
+   
 }
